@@ -1,0 +1,46 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@{
+	Layout = null;
+}
+
+@using ClientDependency.Core.Mvc
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{ Html.RenderPartial("SiteLayout/_MetaData"); }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @{
+        //styles
+        Html.RequiresCss("/css/Footer-Basic.css");
+        Html.RequiresCss("/css/Navigation-Clean1.css");
+        Html.RequiresCss("/css/News-Cards.css");
+        Html.RequiresCss("/css/styles.css");
+
+        //scripts
+        Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js");
+        Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js");
+
+        Html.RequiresJs("/scripts/navigationMenu.js");
+    }
+
+    @Html.RenderCssHere()
+
+</head>
+<body>
+    <div style="margin-top:70px;"></div>
+    @Html.CachedPartial("SiteLayout/_MainNavigation", Model, 3600)
+
+    @RenderBody()
+
+    @Html.CachedPartial("SiteLayout/_Footer", Model, 3600)
+
+    @Html.RenderJsHere()
+</body>
+</html>

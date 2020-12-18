@@ -262,6 +262,9 @@
     <Reference Include="Umbraco.Web.UI, Version=8.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Web.8.9.1\lib\net472\Umbraco.Web.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UmbracoIdentity, Version=7.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UmbracoIdentity.Core.7.2.0\lib\net472\UmbracoIdentity.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -330,16 +333,28 @@
     <Compile Include="App_Start\UmbracoAuthTokenServerExtensions.cs" />
     <Compile Include="App_Start\UmbracoCustomOwinStartup.cs" />
     <Compile Include="App_Start\UmbracoGoogleAuthExtensions.cs" />
+    <Compile Include="App_Start\UmbracoIdentityOwinStartup.cs" />
+    <Compile Include="App_Start\UmbracoIdentityUserComposer.cs" />
     <Compile Include="App_Start\UmbracoStandardOwinStartup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UmbracoIdentityAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UmbracoIdentity\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\UmbracoIdentity\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\UmbracoIdentity\LoginViewModel.cs" />
+    <Compile Include="Models\UmbracoIdentity\RegisterViewModel.cs" />
+    <Compile Include="Models\UmbracoIdentity\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\UmbracoIdentity\RoleManagementModel.cs" />
+    <Compile Include="Models\UmbracoIdentity\UmbracoApplicationMember.cs" />
+    <Compile Include="Models\UmbracoIdentity\UmbracoApplicationRole.cs" />
+    <Compile Include="Models\UmbracoIdentity\UserPasswordModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -406,6 +421,7 @@
     <None Include="Properties\PublishProfiles\cipherRex - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\contactForm.js" />
+    <Content Include="Scripts\foundation.form.validation.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -413,6 +429,7 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.hooks.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2991,6 +3008,24 @@
     <Content Include="Views\Partials\Contact\_Error.cshtml" />
     <Content Include="Views\Partials\Contact\_Success.cshtml" />
     <Content Include="Views\Partials\Grid\CSUSKGrid.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\_ViewStart.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ShowRoles.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ResetPassword.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\RemoveAccountList.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\Register.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\Profile.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ManagePassword.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\Manage.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\LoginStatus.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\Login.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ForgotPassword.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ExternalLoginsList.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\UmbracoIdentityAccount\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\AccountLayout.cshtml" />
+    <Content Include="Views\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

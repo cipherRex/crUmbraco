@@ -16,8 +16,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    @{
-        //styles
+
+    @{ //styles
         Html.RequiresCss("/css/Footer-Basic.css");
         Html.RequiresCss("/css/Navigation-Clean1.css");
         Html.RequiresCss("/css/News-Cards.css");
@@ -27,8 +27,7 @@
         Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js");
         Html.RequiresJs("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js");
 
-        Html.RequiresJs("/scripts/navigationMenu.js");
-    }
+        Html.RequiresJs("/scripts/navigationMenu.js"); }
 
     @Html.RenderCssHere()
 

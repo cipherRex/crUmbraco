@@ -8,6 +8,7 @@
 @using Umbraco.Web.Controllers
 
 @{
+
     var profileModel = Members.GetCurrentMemberProfileModel();
 
     Html.EnableClientValidation();
@@ -83,7 +84,7 @@
         </fieldset>
     }
 
-    @Html.Action("ShowRoles", "UmbracoIdentityAccount")
+    @*@Html.Action("ShowRoles", "UmbracoIdentityAccount")*@
 
     @Html.Action("RemoveAccountList", "UmbracoIdentityAccount")
     

@@ -188,41 +188,41 @@ namespace crUmbraco.Controllers
 
         #endregion
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ToggleRole(string roleName)
-        {
-            if (string.IsNullOrWhiteSpace(roleName)) throw new ArgumentNullException("role cannot be null");
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> ToggleRole(string roleName)
+        //{
+        //    if (string.IsNullOrWhiteSpace(roleName)) throw new ArgumentNullException("role cannot be null");
 
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-            if (user != null)
-            {
-                var found = user.Roles.FirstOrDefault(x => x.RoleName == roleName);
-                if (found != null)
-                {
-                    user.Roles.Remove(found);
-                }
-                else
-                {   
-                    user.Roles.Add(new IdentityMemberRole {RoleName = roleName, UserId = user.Id});
-                }
-                var result = await _userManager.UpdateAsync(user);
-                if (result.Succeeded)
-                {
-                    return RedirectToCurrentUmbracoPage();
-                }
-                else
-                {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                    return CurrentUmbracoPage();
-                }
-            }
+        //    var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+        //    if (user != null)
+        //    {
+        //        var found = user.Roles.FirstOrDefault(x => x.RoleName == roleName);
+        //        if (found != null)
+        //        {
+        //            user.Roles.Remove(found);
+        //        }
+        //        else
+        //        {   
+        //            user.Roles.Add(new IdentityMemberRole {RoleName = roleName, UserId = user.Id});
+        //        }
+        //        var result = await _userManager.UpdateAsync(user);
+        //        if (result.Succeeded)
+        //        {
+        //            return RedirectToCurrentUmbracoPage();
+        //        }
+        //        else
+        //        {
+        //            foreach (var error in result.Errors)
+        //            {
+        //                ModelState.AddModelError("", error);
+        //            }
+        //            return CurrentUmbracoPage();
+        //        }
+        //    }
 
-            return RedirectToCurrentUmbracoPage();
-        }
+        //    return RedirectToCurrentUmbracoPage();
+        //}
 
         [ChildActionOnly]
         public async Task<ActionResult> ShowRoles()

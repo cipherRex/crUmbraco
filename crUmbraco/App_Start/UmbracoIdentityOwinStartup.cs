@@ -62,7 +62,7 @@ namespace crUmbraco
             app.UseCookieAuthentication(cookieOptions, PipelineStage.Authenticate);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
             //app.UseTwoFactorSignInCookie(DefaultAuthenticationTypes.TwoFactorCookie, TimeSpan.FromMinutes(5));
@@ -84,9 +84,9 @@ namespace crUmbraco
             //  appId: "",
             //  appSecret: "");
 
-            //app.UseGoogleAuthentication(
-            //  clientId: "",
-            //  clientSecret: "");
+            app.UseGoogleAuthentication(
+              clientId: "57285695237-h8t84k0ctntkjadoge96hv198giie10s.apps.googleusercontent.com",
+              clientSecret: "o2MlfkjFu7chpK3Bty9gkU0j");
 
 
         }

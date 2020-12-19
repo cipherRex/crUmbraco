@@ -46,6 +46,7 @@ namespace crUmbraco
             // For example:
             // cookieOptions.CookieName = "testing";
             // cookieOptions.ExpireTimeSpan = TimeSpan.FromDays(20);
+    
 
             cookieOptions.Provider = new CookieAuthenticationProvider
             {

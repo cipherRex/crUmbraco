@@ -16,12 +16,12 @@
         .RequiresJs("~/scripts/foundation.form.validation.js", 201);
 }
 
-<h4>Standard login.</h4>
+
 
 @using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>("HandleLogin", null, new { @class = "foundationForm" }))
 {
     <fieldset>
-        <legend>Login</legend>
+        <legend>Standard Login</legend>
 
         @Html.ValidationSummary("loginModel", true)
 

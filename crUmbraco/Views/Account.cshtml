@@ -8,6 +8,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js" integrity="sha256-9GycpJnliUjJDVDqP0UEu/bsm9U+3dnQUH8+3W10vkY=" crossorigin="anonymous"></script>
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" integrity="sha256-GbnVT7RhMd+8Wxo/so9OxdfHkvaWmAMzAQT17YTUCZA=" crossorigin="anonymous" />*@
 
+<style>
+    legend{
+        padding-top:20px;
+    }
+</style>
 
 @{
     //Layout = "AccountLayout.cshtml";
@@ -49,7 +54,8 @@
                     @Html.Partial("~/Views/UmbracoIdentityAccount/Login.cshtml", Model)
                 </div>
                 @*<div class="small-6 columns">*@
-            <div class=" columns">
+            <div class="col-sm-6 columns">
+
                 @Html.Partial("~/Views/UmbracoIdentityAccount/ExternalLoginsList.cshtml", new ExternalLoginListViewModel { Action = "ExternalLogin" })
             </div>
             </div>

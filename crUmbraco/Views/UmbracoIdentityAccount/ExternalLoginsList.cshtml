@@ -3,14 +3,16 @@
 @using Microsoft.Owin.Security
 
 @{
-    
+
     //NOTE: You might need to filter these providers since in some cases there may be identity providers specifically
     // for the back office or front-end. Generally if that is the case there will be items in the Properties collection
     // that you can use to filter or the AuthenticationType will be prefixed with a custom value.
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
-        //Filtering Example:
-        //.Where(p => p.Properties.ContainsKey("UmbracoBackOffice") == false);
-    
+    //Filtering Example:
+    //.Where(p => p.Properties.ContainsKey("UmbracoBackOffice") == false);
+
+
+
     if (!loginProviders.Any())
     {
         <div>
@@ -22,38 +24,47 @@
     }
     else
     {
-        using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>(Model.Action))
+        using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>
+            (Model.Action))
         {
             @Html.AntiForgeryToken()
 
-    <fieldset>
-        <legend>Use another service to log in</legend>
+<fieldset>
 
-        @if (TempData["LinkLoginError"] != null)
-        {
-            <div data-alert class="alert-box alert radius">
-                <ul>
-                    @foreach (var err in (string[])TempData["LinkLoginError"])
-                    {
-                        <li>@err</li>
-                    }                    
-                </ul>
-            </div>
-        }
+    @*<legend>Log in with Google</legend>*@
+    <legend>&nbsp;</legend>
 
-        <ul class="inline-list">
 
-            @foreach (AuthenticationDescription p in loginProviders)
-            {
-                <li>
-                    <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                </li>
-            }
-
-        </ul>
-
-    </fieldset>
-
-        }
+    @if (TempData["LinkLoginError"] != null)
+    {
+        <div data-alert class="alert-box alert radius">
+            <ul>
+                @foreach (var err in (string[])TempData["LinkLoginError"])
+                {
+                    <li>@err</li>
+                }
+            </ul>
+        </div>
     }
-}
+
+    @*<ul class="inline-list">*@
+
+    @foreach (AuthenticationDescription p in loginProviders)
+    {
+        @*<li>*@
+        <button type="submit" style="background-color:transparent;padding:0;border:thin" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+            <img src="~/img/google.png" />
+
+        </button>
+        @*</li>*@
+    }
+
+    @*</ul>*@
+
+</fieldset>
+
+
+
+                    }
+                    }
+                    }

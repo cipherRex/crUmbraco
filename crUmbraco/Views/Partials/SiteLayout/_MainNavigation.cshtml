@@ -9,8 +9,14 @@
 
 <nav class="navbar navbar-default navbar-fixed-top navigation-clean">
     <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">CodeShare Starter Kit</a>
+            <ul class="fa-pull-right" style="padding: 2px 0 0 0; line-height:20px">
+
+                @Html.Partial("~/Views/UmbracoIdentityAccount/LoginStatus.cshtml", Model)
+            </ul>
+
+
+        <div class="navbar-header" style="clear:both;" >
+            <a class="navbar-brand"  href="/">cipher `Rex</a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navcol-1">
@@ -21,10 +27,7 @@
                 </ul>
 
             }
-        <ul class="nav navbar-nav navbar-right">
 
-            @Html.Partial("~/Views/UmbracoIdentityAccount/LoginStatus.cshtml", Model)
-        </ul>
         </div>
     </div>
 </nav>

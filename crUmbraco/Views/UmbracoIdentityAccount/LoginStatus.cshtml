@@ -24,33 +24,36 @@
 }
 
 
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    @*<p>You are currently logged in as @loginStatusModel.Name</p>
+
+        using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>("HandleLogout"))
+        {
+             <fieldset>
+                 <legend>Logout</legend>
+                 <button>Logout</button>
+             </fieldset>
+
+            @Html.HiddenFor(m => logoutModel.RedirectUrl)
+        }*@
+
+
+
+    using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>("HandleLogout"))
+    {
+
+        @loginStatusModel.Name
+
         <button class="linkButton">Logout</button>
 
-
-        @if (User.Identity.IsAuthenticated)
-        {
-            @*<p>You are currently logged in as @loginStatusModel.Name</p>
-
-            using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>("HandleLogout"))
-            {
-                 <fieldset>
-                     <legend>Logout</legend>
-                     <button>Logout</button>
-                 </fieldset>
-
-                @Html.HiddenFor(m => logoutModel.RedirectUrl)
-            }*@
-
-            @loginStatusModel.Name
-
-            using (Html.BeginUmbracoForm<UmbracoIdentityAccountController>("HandleLogout"))
-            {
-
-
-                @Html.HiddenFor(m => logoutModel.RedirectUrl)
+        @Html.HiddenFor(m => logoutModel.RedirectUrl)
 
 
 
-            }
-        
+    }
+
 }

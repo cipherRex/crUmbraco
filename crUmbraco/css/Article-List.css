@@ -1,3 +1,11 @@
+div.article-list .container {
+    background: #f5f6f7;
+    padding-bottom: 30px;
+    margin-top: 140px;
+    border-radius:10px;
+    box-shadow: 5px 10px #bdbdbd;
+}
+
 .article-list {
   color:#313437;
   background-color:#fff;

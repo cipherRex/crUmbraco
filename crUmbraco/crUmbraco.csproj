@@ -399,6 +399,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\carousel.jpg" />
     <Content Include="img\code.jpg" />
+    <Content Include="img\google.png" />
     <Content Include="img\navigation.jpg" />
     <Content Include="img\party.jpg" />
     <Content Include="Media\13cdvjcc\party.jpg" />

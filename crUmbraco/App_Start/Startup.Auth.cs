@@ -24,6 +24,9 @@ namespace crUmbraco
             // Configure the sign in cookie
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
+                //AuthenticationType = "Identity.Application",
+                CookieName = ".AspNet.SharedCookie",
+
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
                 Provider = new CookieAuthenticationProvider

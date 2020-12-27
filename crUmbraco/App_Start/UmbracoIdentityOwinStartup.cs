@@ -9,6 +9,8 @@ using System.Linq;
 using UmbracoIdentity; 
 using crUmbraco;
 using crUmbraco.Models.UmbracoIdentity;
+//using Microsoft.Owin.Security.Interop;
+//using Microsoft.AspNetCore.DataProtection;
 
 [assembly: OwinStartup("UmbracoIdentityStartup", typeof(UmbracoIdentityOwinStartup))]
 namespace crUmbraco
@@ -40,13 +42,15 @@ namespace crUmbraco
             // Configure the sign in cookie
             
             var cookieOptions = CreateFrontEndCookieAuthenticationOptions();
+            //cookieOptions.CookieName = ".AspNet.SharedCookie";
 
             // You can change the cookie options here. The cookie options will be automatically set
             // based on what is configured in the security section of umbracoSettings.config and the web.config.
             // For example:
-            // cookieOptions.CookieName = "testing";
+             cookieOptions.CookieName = "cipherRex";
+            //cookieOptions.AuthenticationType = "Identity.Application";
             // cookieOptions.ExpireTimeSpan = TimeSpan.FromDays(20);
-    
+
 
             cookieOptions.Provider = new CookieAuthenticationProvider
             {
@@ -57,8 +61,34 @@ namespace crUmbraco
                         .OnValidateIdentity<UmbracoMembersUserManager<UmbracoApplicationMember>, UmbracoApplicationMember, int>(
                             TimeSpan.FromMinutes(30),
                             (manager, user) => user.GenerateUserIdentityAsync(manager),
-                            identity => identity.GetUserId<int>())
+                            identity => identity.GetUserId<int>()),
             };
+
+            //app.UseCookieAuthentication(new CookieAuthenticationOptions
+            //{
+            //    AuthenticationType = "Identity.Application",
+            //    CookieName = ".AspNet.SharedCookie",
+            //    LoginPath = new PathString("/Account/Login"),
+            //    Provider = new CookieAuthenticationProvider
+            //    {
+            //        OnValidateIdentity =
+            //            SecurityStampValidator
+            //                .OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+            //                    validateInterval: TimeSpan.FromMinutes(30),
+            //                    regenerateIdentity: (manager, user) =>
+            //                        user.GenerateUserIdentityAsync(manager))
+            //    },
+            //    TicketDataFormat = new AspNetTicketDataFormat(
+            //        new DataProtectorShim(
+            //            DataProtectionProvider.Create("{PATH TO COMMON KEY RING FOLDER}",
+            //                (builder) => { builder.SetApplicationName("SharedCookieApp"); })
+            //            .CreateProtector(
+            //                "Microsoft.AspNetCore.Authentication.Cookies." +
+            //                    "CookieAuthenticationMiddleware",
+            //                "Identity.Application",
+            //                "v2"))),
+            //    CookieManager = new ChunkingCookieManager()
+            //});
 
             app.UseCookieAuthentication(cookieOptions, PipelineStage.Authenticate);
 

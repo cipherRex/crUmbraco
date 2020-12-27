@@ -1,11 +1,11 @@
 ﻿@inherits UmbracoViewPage
 
-@{ 
+@{
     string mainImageUrl = Model.Value<IPublishedContent>("mainImage")?.GetCropUrl(945, 400) ?? "";
 }
 
 <!-- test -->
-<div class="article-list"> 
+<div class="article-list">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-12">
@@ -27,7 +27,11 @@
                     }
                 </div>
                 <div class="text">
-                    @Html.GetGridHtml(Model, "contentGrid", "CSUSKGrid")
+                    @*
+                        @Html.GetGridHtml(Model, "contentGrid", "CSUSKGrid")
+                    *@
+
+                    @Html.GetGridHtml(Model, "contentGrid", "bootstrap3-fluid")
                 </div>
             </div>
         </div>

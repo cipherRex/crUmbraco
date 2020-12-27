@@ -9,8 +9,8 @@ using System.Linq;
 using UmbracoIdentity; 
 using crUmbraco;
 using crUmbraco.Models.UmbracoIdentity;
-//using Microsoft.Owin.Security.Interop;
-//using Microsoft.AspNetCore.DataProtection;
+using Microsoft.Owin.Security.Interop;
+using Microsoft.AspNetCore.DataProtection;
 
 [assembly: OwinStartup("UmbracoIdentityStartup", typeof(UmbracoIdentityOwinStartup))]
 namespace crUmbraco
@@ -21,6 +21,12 @@ namespace crUmbraco
     /// </summary>
     public class UmbracoIdentityOwinStartup : UmbracoIdentityOwinStartupBase
     {
+       
+        public  UmbracoIdentityOwinStartup() 
+        { 
+        
+        }
+
         protected override void ConfigureUmbracoUserManager(IAppBuilder app)
         {
             base.ConfigureUmbracoUserManager(app);
@@ -52,43 +58,46 @@ namespace crUmbraco
             // cookieOptions.ExpireTimeSpan = TimeSpan.FromDays(20);
 
 
-            cookieOptions.Provider = new CookieAuthenticationProvider
+            //cookieOptions.Provider = new CookieAuthenticationProvider
+            //{
+            //    // Enables the application to validate the security stamp when the user 
+            //    // logs in. This is a security feature which is used when you 
+            //    // change a password or add an external login to your account.  
+            //    OnValidateIdentity = SecurityStampValidator
+            //            .OnValidateIdentity<UmbracoMembersUserManager<UmbracoApplicationMember>, UmbracoApplicationMember, int>(
+            //                TimeSpan.FromMinutes(30),
+            //                (manager, user) => user.GenerateUserIdentityAsync(manager),
+            //                identity => identity.GetUserId<int>()),
+            //};
+
+            string keysPath = string.Concat( System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath,
+                "Keys\\");
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                // Enables the application to validate the security stamp when the user 
-                // logs in. This is a security feature which is used when you 
-                // change a password or add an external login to your account.  
-                OnValidateIdentity = SecurityStampValidator
+                //AuthenticationType = "Identity.Application",
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                CookieName = "cipherRex",
+                LoginPath = new PathString("/Account/Login"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = SecurityStampValidator
                         .OnValidateIdentity<UmbracoMembersUserManager<UmbracoApplicationMember>, UmbracoApplicationMember, int>(
                             TimeSpan.FromMinutes(30),
                             (manager, user) => user.GenerateUserIdentityAsync(manager),
-                            identity => identity.GetUserId<int>()),
-            };
-
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions
-            //{
-            //    AuthenticationType = "Identity.Application",
-            //    CookieName = ".AspNet.SharedCookie",
-            //    LoginPath = new PathString("/Account/Login"),
-            //    Provider = new CookieAuthenticationProvider
-            //    {
-            //        OnValidateIdentity =
-            //            SecurityStampValidator
-            //                .OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-            //                    validateInterval: TimeSpan.FromMinutes(30),
-            //                    regenerateIdentity: (manager, user) =>
-            //                        user.GenerateUserIdentityAsync(manager))
-            //    },
-            //    TicketDataFormat = new AspNetTicketDataFormat(
-            //        new DataProtectorShim(
-            //            DataProtectionProvider.Create("{PATH TO COMMON KEY RING FOLDER}",
-            //                (builder) => { builder.SetApplicationName("SharedCookieApp"); })
-            //            .CreateProtector(
-            //                "Microsoft.AspNetCore.Authentication.Cookies." +
-            //                    "CookieAuthenticationMiddleware",
-            //                "Identity.Application",
-            //                "v2"))),
-            //    CookieManager = new ChunkingCookieManager()
-            //});
+                            identity => identity.GetUserId<int>())
+                },
+                TicketDataFormat = new AspNetTicketDataFormat(
+                    new DataProtectorShim(
+                        DataProtectionProvider.Create(new System.IO.DirectoryInfo( keysPath),
+                            (builder) => { builder.SetApplicationName("cipherRex"); })
+                        .CreateProtector(
+                            "Microsoft.AspNetCore.Authentication.Cookies." +
+                                "CookieAuthenticationMiddleware",
+                            "Identity.Application",
+                            "v2"))),
+                CookieManager = new ChunkingCookieManager()
+            });
 
             app.UseCookieAuthentication(cookieOptions, PipelineStage.Authenticate);
 
